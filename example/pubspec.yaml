@@ -1,0 +1,19 @@
+name: example
+description: A demo of the figma_auto_layout package.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.2 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  figma_auto_layout:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
