@@ -35,7 +35,7 @@ import 'package:figma_auto_layout/figma_auto_layout.dart';
 ## :joystick: Usage
 
 ### Figma's "Auto layout" features:
-![Figma autolayout](screenshots/figma_auto_layout.png)
+![Figma autolayout](https://raw.githubusercontent.com/JakesMD/flutter_figma_auto_layout/main/screenshots/figma_auto_layout.png)
 
 ``` dart
 FigmaAutoLayout(
@@ -49,7 +49,7 @@ FigmaAutoLayout(
 ```
 
 ### Figma's "Advanced layout" features:
-![Figma advanced layout](screenshots/figma_advanced_layout.png)
+![Figma advanced layout](https://raw.githubusercontent.com/JakesMD/flutter_figma_auto_layout/main/screenshots/figma_advanced_layout.png)
 
 ``` dart
 FigmaAutoLayout(
@@ -60,7 +60,7 @@ FigmaAutoLayout(
 ```
 
 ### Figma's auto layout frame features:
-![Figma advanced layout frame](screenshots/figma_auto_layout_frame.png)
+![Figma advanced layout frame](https://raw.githubusercontent.com/JakesMD/flutter_figma_auto_layout/main/screenshots/figma_auto_layout_frame.png)
 ``` dart
 FigmaAutoLayout(
     width: 50, // This will override `widthMode`.
@@ -72,7 +72,7 @@ FigmaAutoLayout(
 ```
 
 ### Figma's auto layout child features:
-![Figma auto layout child](screenshots/figma_auto_layout_child.png)
+![Figma auto layout child](https://raw.githubusercontent.com/JakesMD/flutter_figma_auto_layout/main/screenshots/figma_auto_layout_child.png)
 ``` dart
 FigmaAutoLayout(
     children: [
