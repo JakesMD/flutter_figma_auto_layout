@@ -15,13 +15,13 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.all(24),
+            padding: const EdgeInsets.all(24),
 
             // "Card"
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Color(0xff1D2570),
+                  color: const Color(0xff1D2570),
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(16),
@@ -37,80 +37,75 @@ class MyApp extends StatelessWidget {
                     FigmaAutoLayoutChild(
                       height: 200,
                       child: Container(
-                        color: Color(0xffEAECFF),
+                        color: const Color(0xffEAECFF),
                       ),
                     ),
 
                     // Title, subtitle and avatars
-                    FigmaAutoLayoutChild(
-                      child: FigmaAutoLayout(
-                        padding: EdgeInsets.all(16),
-                        spacing: 12,
-                        children: [
-                          // Title and avatars
-                          FigmaAutoLayoutChild(
-                            child: FigmaAutoLayout(
-                              direction: Axis.horizontal,
-                              spacingMode: FigmaSpacingMode.spaceBetween,
-                              alignment: AlignmentDirectional.centerStart,
-                              children: [
-                                // Title
-                                FigmaAutoLayoutChild(
-                                  child: Text(
-                                    "Lorem Ipsum",
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xff1D2570),
-                                    ),
-                                  ),
+                    FigmaAutoLayout(
+                      direction: Axis.vertical,
+                      padding: const EdgeInsets.all(16),
+                      spacing: 12,
+                      children: [
+                        // Title and avatars
+                        FigmaAutoLayout(
+                          direction: Axis.horizontal,
+                          spacingMode: FigmaSpacingMode.spaceBetween,
+                          alignment: AlignmentDirectional.centerStart,
+                          children: [
+                            // Title
+                            const FigmaAutoLayoutChild(
+                              child: Text(
+                                "Lorem Ipsum",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xff1D2570),
                                 ),
+                              ),
+                            ),
 
-                                // Avatars
-                                FigmaAutoLayoutChild(
-                                  child: FigmaAutoLayout(
-                                    direction: Axis.horizontal,
-                                    spacing: -8,
-                                    canvasStacking: StackingOrder.lastOnTop,
-                                    children: List.generate(
-                                      4,
-                                      (index) => FigmaAutoLayoutChild(
-                                        width: 24,
-                                        height: 24,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Color(0xffEAECFF),
-                                            border: Border.all(
-                                              color: Color(0xff1D2570),
-                                              width: 2,
-                                            ),
-                                          ),
-                                        ),
+                            // Avatars
+                            FigmaAutoLayout(
+                              direction: Axis.horizontal,
+                              spacing: -8,
+                              canvasStacking: StackingOrder.lastOnTop,
+                              children: List.generate(
+                                4,
+                                (index) => FigmaAutoLayoutChild(
+                                  width: 24,
+                                  height: 24,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: const Color(0xffEAECFF),
+                                      border: Border.all(
+                                        color: const Color(0xff1D2570),
+                                        width: 2,
                                       ),
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-
-                          // Subtitle
-                          FigmaAutoLayoutChild(
-                            child: Text(
-                              "Lorem ipsum dolor sit amet consectetur.",
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Color(0xff1D2570),
                               ),
                             ),
+                          ],
+                        ),
+
+                        // Subtitle
+                        const FigmaAutoLayoutChild(
+                          child: Text(
+                            "Lorem ipsum dolor sit amet consectetur.",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Color(0xff1D2570),
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
 
                     // Favorite icon
-                    FigmaAutoLayoutChild.absolutePosition(
+                    const FigmaAutoLayoutChild.absolutePosition(
                       top: 16,
                       end: 16,
                       child: Icon(

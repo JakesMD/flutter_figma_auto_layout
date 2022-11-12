@@ -1,6 +1,6 @@
 name: figma_auto_layout
 description: A replicate of Figma's auto layout feature that makes converting Figma designs to code faster and less error prone.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/JakesMD/flutter_figma_auto_layout
 repository: https://github.com/JakesMD/flutter_figma_auto_layout
 

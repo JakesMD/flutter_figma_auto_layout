@@ -18,21 +18,12 @@ enum FigmaSizingMode {
 
 /// A replicate of Figma's auto layout feature that aligns its children vertically or horizontally
 /// with positive or negative spacing.
-class FigmaAutoLayout extends StatelessWidget {
+class FigmaAutoLayout extends FigmaAutoLayoutChild {
   final List<FigmaAutoLayoutChild> children;
 
-  /// This overrides [widthMode].
-  final double? width;
-
-  /// This overrides [heightMode].
-  final double? height;
-
-  final FigmaSizingMode widthMode;
-  final FigmaSizingMode heightMode;
-
+  final Axis direction;
   final double spacing;
   final EdgeInsetsGeometry padding;
-  final Axis direction;
   final AlignmentDirectional alignment;
   final bool textBaselineAlignment;
 
@@ -47,13 +38,13 @@ class FigmaAutoLayout extends StatelessWidget {
   const FigmaAutoLayout({
     super.key,
     this.children = const [],
-    this.width,
-    this.height,
-    this.widthMode = FigmaSizingMode.hug,
-    this.heightMode = FigmaSizingMode.hug,
+    required this.direction,
+    super.width,
+    super.height,
+    super.widthMode = FigmaSizingMode.hug,
+    super.heightMode = FigmaSizingMode.hug,
     this.spacing = 0,
     this.padding = const EdgeInsets.all(0),
-    this.direction = Axis.vertical,
     this.alignment = AlignmentDirectional.topStart,
     this.textBaselineAlignment = false,
     this.spacingMode = FigmaSpacingMode.packed,
@@ -61,7 +52,7 @@ class FigmaAutoLayout extends StatelessWidget {
     this.clipContent = false,
     this.textDirection,
     this.textBaseline = TextBaseline.alphabetic,
-  });
+  }) : super(child: const SizedBox());
 
   TextDirection _getTextDirection(BuildContext context) {
     return textDirection ??

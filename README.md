@@ -73,6 +73,7 @@ FigmaAutoLayout(
 
 ### Figma's auto layout child features:
 ![Figma auto layout child](https://raw.githubusercontent.com/JakesMD/flutter_figma_auto_layout/main/screenshots/figma_auto_layout_child.png)
+ You need to wrap your child with a `FigmaAutoLayoutChild` because `children` can only take `FigmaAutoLayoutChild`ren and `FigmaAutoLayout`s.
 ``` dart
 FigmaAutoLayout(
     children: [
