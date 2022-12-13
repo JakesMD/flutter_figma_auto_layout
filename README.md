@@ -112,3 +112,6 @@ FigmaAutoLayout(
     textBaseline: TextBaseline.alphabetic,
 );
 ```
+
+## :information_source: Additional information
+Please feel free to contribute!
