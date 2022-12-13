@@ -16,7 +16,7 @@ enum FigmaSizingMode {
   hug,
 }
 
-/// A replicate of Figma's auto layout feature that aligns its children vertically or horizontally
+/// A replica of Figma's auto layout feature that aligns its children vertically or horizontally
 /// with positive or negative spacing.
 class FigmaAutoLayout extends FigmaAutoLayoutChild {
   final List<FigmaAutoLayoutChild> children;

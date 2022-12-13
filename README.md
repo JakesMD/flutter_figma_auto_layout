@@ -1,4 +1,4 @@
-A replicate of Figma's auto layout feature that makes converting Figma designs to code faster and less error prone.
+A replica of Figma's auto layout feature that makes converting Figma designs to code faster and less error prone.
 
 ![Figma autolayout](https://help.figma.com/hc/article_attachments/5979592402839/auto-layout-panel.png)
 Source: figma.com
