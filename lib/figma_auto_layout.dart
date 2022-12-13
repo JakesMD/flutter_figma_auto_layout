@@ -60,6 +60,7 @@ class FigmaAutoLayout extends FigmaAutoLayoutChild {
         TextDirection.ltr;
   }
 
+  /// Calculates the main axis alignment from [alignment].
   MainAxisAlignment _calculateMainAxisAlignment() {
     MainAxisAlignment mainAxisAlignment;
 
@@ -99,6 +100,7 @@ class FigmaAutoLayout extends FigmaAutoLayoutChild {
     return mainAxisAlignment;
   }
 
+  /// Calculates the cross axis alignment from [alignment].
   CrossAxisAlignment _calculateCrossAxisAlignment() {
     CrossAxisAlignment crossAxisAlignment;
 
@@ -142,6 +144,7 @@ class FigmaAutoLayout extends FigmaAutoLayoutChild {
     return crossAxisAlignment;
   }
 
+  /// Calculates the main axis size from [widthMode] and [heightMode].
   MainAxisSize _calculateMainAxisSize() {
     switch (direction) {
       case Axis.horizontal:
@@ -157,6 +160,7 @@ class FigmaAutoLayout extends FigmaAutoLayoutChild {
     }
   }
 
+  /// Calculates the width from [widthMode].
   double? _calculateWidth() {
     if (width != null) {
       return width!;
@@ -168,6 +172,7 @@ class FigmaAutoLayout extends FigmaAutoLayoutChild {
     }
   }
 
+  /// Calculates the height from [heightMode].
   double? _calculateHeight() {
     if (height != null) {
       return height!;
@@ -180,46 +185,86 @@ class FigmaAutoLayout extends FigmaAutoLayoutChild {
     }
   }
 
-  List<Widget> _buildChildren() {
-    var newChildren = <Widget>[];
-
-    FigmaAutoLayoutChild child;
-    Widget newChild;
+  /// Generates a list of normal children with their appropriate sizes.
+  List<Widget> _buildNormalChildren() {
+    var newChildren = <Widget>[]; // List of new children.
+    FigmaAutoLayoutChild child; // A child from the list of old children.
+    Widget newChild; // Child to be added to the list of new children.
 
     for (int x = 0; x < children.length; x++) {
       child = children[x];
       newChild = child;
 
       if (!child.hasAbsolutePosition) {
+        // Expands width and height.
         if (child.widthMode == FigmaSizingMode.fill &&
             child.heightMode == FigmaSizingMode.fill &&
             child.width == null &&
             child.height == null) {
-          newChild = Expanded(child: SizedBox.expand(child: child));
+          newChild = Expanded(
+            child: SizedBox.expand(child: child),
+          );
+
+          // Hugs or has fixes width and height.
+        } else if (child.widthMode == FigmaSizingMode.hug &&
+            child.heightMode == FigmaSizingMode.hug) {
+          newChild = SizedBox(
+            width: child.width,
+            height: child.height,
+            child: child,
+          );
+
+          //
         } else {
           switch (direction) {
             case Axis.horizontal:
+              // Expands height and hugs or has fixed width.
               if (child.heightMode == FigmaSizingMode.fill &&
                   child.height == null) {
-                newChild = SizedBox(height: double.infinity, child: child);
+                newChild = SizedBox(
+                  height: double.infinity,
+                  width: child.width,
+                  child: child,
+                );
+                // Expands width and hugs or has fixed height.
               } else if (child.widthMode == FigmaSizingMode.fill &&
                   child.width == null) {
-                newChild = Expanded(child: child);
+                newChild = Expanded(
+                  child: SizedBox(
+                    height: child.height,
+                    child: child,
+                  ),
+                );
               }
               break;
+
+            //
             case Axis.vertical:
+              // Expands width and hugs or has fixed height.
               if (child.widthMode == FigmaSizingMode.fill &&
                   child.width == null) {
-                newChild = SizedBox(width: double.infinity, child: child);
+                newChild = SizedBox(
+                  width: double.infinity,
+                  height: child.height,
+                  child: child,
+                );
               }
+              // Expands height and hugs or has fixed width.
               if (child.heightMode == FigmaSizingMode.fill &&
                   child.height == null) {
-                newChild = Expanded(child: child);
+                newChild = Expanded(
+                  child: SizedBox(
+                    width: child.width,
+                    child: child,
+                  ),
+                );
               }
               break;
           }
         }
         newChildren.add(newChild);
+
+        // Add a spacer if spaceBetween
         if (spacingMode == FigmaSpacingMode.spaceBetween &&
             x != children.length - 1) {
           newChildren.add(const Spacer());
@@ -230,6 +275,7 @@ class FigmaAutoLayout extends FigmaAutoLayoutChild {
     return newChildren;
   }
 
+  /// Generates a list of absolute positioned children at their appropriate positions.
   List<Widget> _buildPositionedChildren(BuildContext context) {
     var newChildren = <Widget>[];
 
@@ -270,8 +316,7 @@ class FigmaAutoLayout extends FigmaAutoLayoutChild {
               mainAxisAlignment: _calculateMainAxisAlignment(),
               mainAxisSize: _calculateMainAxisSize(),
               crossAxisAlignment: _calculateCrossAxisAlignment(),
-              clipBehavior: clipContent ? Clip.hardEdge : Clip.none,
-              children: _buildChildren(),
+              children: _buildNormalChildren(),
             ),
           ),
         ),
@@ -281,6 +326,7 @@ class FigmaAutoLayout extends FigmaAutoLayoutChild {
   }
 }
 
+/// A child of a [FigmaAutoLayout].
 class FigmaAutoLayoutChild extends StatelessWidget {
   final Widget child;
 
@@ -326,10 +372,6 @@ class FigmaAutoLayoutChild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      height: height,
-      child: child,
-    );
+    return child;
   }
 }

@@ -4,7 +4,6 @@ A replicate of Figma's auto layout feature that makes converting Figma designs t
 Source: figma.com
 
 ## :sparkles: Features
-
 - [x] Vertical and horizontal layout directions
 - [x] Alignment
 - [x] Positive and negative spacing
@@ -13,12 +12,13 @@ Source: figma.com
 - [x] Canvas stacking (first on top, last on top)
 - [x] Text baseline alignment (on, off)
 - [x] Absolute positioned children
-- [x] Clip content (on, off)
+- [x] Clip content (on, off) ONLY works for absolute positioned children
 - [x] Fill, hug and fixed sizing modes
 
 ### :x: Missing Features
 - [x] Strokes (included in layout, excluded from layout)
-- [x] Figma's constraints for absolute positioned children.
+- [x] Figma's constraints for absolute positioned children
+- [x] Clip content for normal children (HELP APPRECIATED! https://github.com/JakesMD/flutter_figma_auto_layout/issues/2#issue-1484381678)
 
 ## :rocket: Getting started
 
@@ -67,13 +67,15 @@ FigmaAutoLayout(
     height: null,
     widthMode: FigmaSizingMode.fill,
     heightMode: FigmaSizingMode.hug,
-    clipContent: false,
+    clipContent: false, // This currently only works for absolute positioned children.
+    // See https://github.com/JakesMD/flutter_figma_auto_layout/issues/2#issue-1484381678
 );
 ```
 
 ### Figma's auto layout child features:
 ![Figma auto layout child](https://raw.githubusercontent.com/JakesMD/flutter_figma_auto_layout/main/screenshots/figma_auto_layout_child.png)
- You need to wrap your child with a `FigmaAutoLayoutChild` because `children` can only take `FigmaAutoLayoutChild`ren and `FigmaAutoLayout`s.
+
+You need to wrap your child with a `FigmaAutoLayoutChild` because `children` can only take `FigmaAutoLayoutChild`ren and `FigmaAutoLayout`s.
 ``` dart
 FigmaAutoLayout(
     children: [
