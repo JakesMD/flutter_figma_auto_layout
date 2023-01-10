@@ -275,12 +275,35 @@ class FigmaAutoLayout extends FigmaAutoLayoutChild {
     return newChildren;
   }
 
-  /// Generates a list of absolute positioned children at their appropriate positions.
-  List<Widget> _buildPositionedChildren(BuildContext context) {
+  /// Generates a list of absolute positioned children at their appropriate positions
+  /// to be displayed on top of the normal children.
+  List<Widget> _buildPositionedChildrenUnderneath(BuildContext context) {
     var newChildren = <Widget>[];
 
     for (final child in children) {
-      if (child.hasAbsolutePosition) {
+      if (child.hasAbsolutePosition && !child.showOnTop) {
+        newChildren.add(
+          Positioned.directional(
+            textDirection: _getTextDirection(context),
+            start: child.start,
+            top: child.top,
+            end: child.end,
+            bottom: child.bottom,
+            child: child,
+          ),
+        );
+      }
+    }
+    return newChildren;
+  }
+
+  /// Generates a list of absolute positioned children at their appropriate positions.
+  /// to be displayed underneath the normal children.
+  List<Widget> _buildPositionedChildrenOnTop(BuildContext context) {
+    var newChildren = <Widget>[];
+
+    for (final child in children) {
+      if (child.hasAbsolutePosition && child.showOnTop) {
         newChildren.add(
           Positioned.directional(
             textDirection: _getTextDirection(context),
@@ -301,6 +324,7 @@ class FigmaAutoLayout extends FigmaAutoLayoutChild {
     return Stack(
       clipBehavior: clipContent ? Clip.hardEdge : Clip.none,
       children: [
+        ..._buildPositionedChildrenUnderneath(context),
         SizedBox(
           width: _calculateWidth(),
           height: _calculateHeight(),
@@ -320,7 +344,7 @@ class FigmaAutoLayout extends FigmaAutoLayoutChild {
             ),
           ),
         ),
-        ..._buildPositionedChildren(context),
+        ..._buildPositionedChildrenOnTop(context),
       ],
     );
   }
@@ -343,6 +367,7 @@ class FigmaAutoLayoutChild extends StatelessWidget {
   final double? top;
   final double? end;
   final double? bottom;
+  final bool showOnTop;
 
   const FigmaAutoLayoutChild({
     super.key,
@@ -355,7 +380,8 @@ class FigmaAutoLayoutChild extends StatelessWidget {
         start = null,
         top = null,
         end = null,
-        bottom = null;
+        bottom = null,
+        showOnTop = false;
 
   const FigmaAutoLayoutChild.absolutePosition({
     super.key,
@@ -366,6 +392,7 @@ class FigmaAutoLayoutChild extends StatelessWidget {
     this.top,
     this.end,
     this.bottom,
+    this.showOnTop = true,
   })  : hasAbsolutePosition = true,
         widthMode = FigmaSizingMode.hug,
         heightMode = FigmaSizingMode.hug;

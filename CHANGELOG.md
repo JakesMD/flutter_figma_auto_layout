@@ -1,3 +1,6 @@
+## 1.1.0
+* Allow absolute positioned children to be displayed underneath the normal children with the `showOnTop` field.
+
 ## 1.0.0
 * Update `README.md`.
 * First stable release.

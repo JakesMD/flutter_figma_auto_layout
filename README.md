@@ -99,6 +99,7 @@ FigmaAutoLayout(
             height: null, // This will match the childs height.
             top: 10,
             end: 10,
+            showOnTop: true, // If false this child will be displayed underneath the normal children.
             child: Container(),
         ),
     ],
